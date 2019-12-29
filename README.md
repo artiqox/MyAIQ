@@ -17,7 +17,7 @@
 
 ```bash
 $ # Clone the sources
-$ git clone https://github.com/app-generator/flask-dashboard-adminator.git
+$ git clone https://github.com/artiqox/MyAIQ.git
 $ cd flask-dashboard-adminator
 $
 $ # Virtualenv modules installation (Unix based systems)
@@ -55,29 +55,6 @@ $ # Access the app in browser: http://127.0.0.1:5000/
 
 <br />
 
-| [Flask Dashboard Material](https://appseed.us/admin-dashboards/flask-dashboard-material-pro) | [Flask Dashboard Argon](https://appseed.us/admin-dashboards/flask-dashboard-argon-pro) | [Flask Dashboard Black](https://appseed.us/admin-dashboards/flask-dashboard-black-pro) |
-| --- | --- | --- |
-| [![Flask Dashboard Material PRO](https://raw.githubusercontent.com/app-generator/static/master/products/flask-dashboard-material-pro-intro.gif)](https://appseed.us/admin-dashboards/flask-dashboard-material-pro)  | [![Flask Dashboard Argon PRO](https://raw.githubusercontent.com/app-generator/static/master/products/flask-dashboard-argon-pro-intro.gif)](https://appseed.us/admin-dashboards/flask-dashboard-argon-pro) | [![Flask Dashboard Black PRO](https://raw.githubusercontent.com/app-generator/static/master/products/flask-dashboard-black-pro-intro.gif)](https://appseed.us/admin-dashboards/flask-dashboard-black-pro)
-
-<br />
-
-## Support
-
-- Free support via eMail < [support @ appseed.us](https://appseed.us/support) > and **Github** issues tracker
-- 24/7 Live Support via [Discord](https://discord.gg/fZC6hup) for paid plans and commercial products.
-
-<br />
-
-## Credits & Links
-
-- [Flask Dashboard Adminator](https://appseed.us/admin-dashboards/flask-dashboard-adminator) - Product page
-- [Flask Dashboard Adminator](https://flask-dashboard-adminator.appseed.us/) - Live DEMO
-- [Flask Framework](https://www.palletsprojects.com/p/flask/) - The offcial website
-- [Flask Dashboard - Open-Source Boilerplates](https://dev.to/sm0ke/flask-dashboard-open-source-boilerplates-dkg) - A popular article published on Dev.to platform
-- [Flask Dashboard](https://admin-dashboards.com/tags/flask-dashboard) - Index provided by **Admin-Dashboards.com**
-
-<br />
-
 ## License
 
 @MIT
@@ -85,4 +62,4 @@ $ # Access the app in browser: http://127.0.0.1:5000/
 <br />
 
 ---
-[Flask Dashboard Adminator](https://appseed.us/admin-dashboards/flask-dashboard-adminator) provided by **AppSeed**
+[Artiqox](https://www.artiqox.com)
