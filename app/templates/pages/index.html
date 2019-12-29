@@ -1,0 +1,67 @@
+{% extends "layouts/default.html" %}
+
+{% block title %} Dashboard {% endblock title %}
+
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+              <div class="masonry-item w-100">
+                <!-- #MyAIQ wallet ==================== -->
+                <div class="bd bgc-white">
+                  <div class="layers">
+                    <div class="layer w-100">
+                      <div class="bgc-light-blue-500 c-white p-20">
+                        <div class="peers ai-c jc-sb gap-40">
+                          <div class="peer peer-greed">
+                            <h5>{{ current_user.aie_account }}</h5>
+                            <p class="mB-0">{{ current_user.displayname }}</p>
+                          </div>
+                          <div class="peer">
+                            <h3 class="text-right">{{ aiq_balance }} AIQ, {{ aie_balance }} AIE</h3>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="table-responsive p-20">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th class="bdwT-0">Date</th>
+                              <th class="bdwT-0">Sender</th>
+                              <th class="bdwT-0">Recipient</th>
+                              <th class="bdwT-0">Amount</th>
+                              <th class="bdwT-0">Fee (AIE)</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+{% block container %}
+    {% for timestamp, transaction in transactions.items() %}
+                            <tr>
+                              <td class="fw-600">{{ timestamp }}</td>
+        {% if transaction['sender'] == current_user.aie_account %}
+                              <td>You</td>
+        {% else %}
+                              <td>{{ transaction['sender'] }}</td>
+        {% endif %}
+        {% if transaction['recipient'] == current_user.aie_account %}
+                              <td>You</td>
+        {% else %}
+                              <td>{{ transaction['recipient'] }}</td>
+        {% endif %}
+                              <td><span class="text-success">{{ transaction['amount'] }}</span></td>
+                              <td><span class="text-success">{{ transaction['fee'] }}</span></td>
+                            </tr>
+    {% endfor %}
+{% endblock %}
+                          </tbody>
+                        </table>
+                       </div>
+                    </div>
+                  </div>
+                  <div class="ta-c bdT w-100 p-20">
+                    <a href="https://block.hebeblock.com/#/account/{{ current_user.aie_account }}?type=Aie">Check all the transactions</a>
+                  </div>
+                </div>
+              </div>
+            
+{% endblock content %}
