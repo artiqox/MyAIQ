@@ -27,18 +27,18 @@
           {{ form.hidden_tag() }}
 
           <div class="form-group">
-            <label class="text-normal text-dark">Friendly Name</label>
-            {{ form.name(placeholder="Friendly Name", class="form-control") }}
+            <label class="text-normal text-dark">Register with</label>
+            {% for subfield in form.type %}
+            <tr>
+                <td>{{ subfield }}</td>
+                <td>{{ subfield.label }}</td>
+            </tr>
+            {% endfor %}
           </div>
 
           <div class="form-group">
             <label class="text-normal text-dark">Username</label>
             {{ form.username(placeholder="Username", class="form-control") }}
-          </div>
-          
-          <div class="form-group">
-            <label class="text-normal text-dark">eMail Address</label>
-            {{ form.email(placeholder="eMail Address", class="form-control") }}
           </div>
 
           <div class="form-group">
