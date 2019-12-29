@@ -1,8 +1,8 @@
-# [Flask Dashboard Adminator](https://appseed.us/admin-dashboards/flask-dashboard-adminator)
+# [MyAIQ](https://www.artiqox.com)
 
-**[Open-Source Admin Dashboard](https://appseed.us/admin-dashboards/flask-dashboard-adminator)** coded in **Flask Framework** on top of **Adminator Dashboard** design. **Features**:
+**[Open-Source Web Service for ArtiqoxEnergy Blockchain](https://www.artiqox.com)** coded in **Flask Framework** on top of **Adminator Dashboard** design. **Features**:
 
-- SQLite database
+- MySQL database
 - SQLAlchemy ORM
 - Session-Based authentication flow (login, register)
 - UI Kit: [Adminator Free Dashboard](https://github.com/app-generator/fork-adminator-admin-dashboard) by **ColorLib**
@@ -51,7 +51,7 @@ $ # Access the app in browser: http://127.0.0.1:5000/
 
 <br />
 
-## Want more? Go PRO!
+## Want more? Hold your horses, we are building it
 
 <br />
 
