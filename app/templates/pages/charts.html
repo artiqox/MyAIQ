@@ -9,14 +9,43 @@
 
     <div class="row gap-20 masonry pos-r">
         <div class="masonry-sizer col-md-6 pos-a"></div>
-        <div class="masonry-item col-md-6">
-        <div class="bgc-white p-20 bd">
-            <h6 class="c-grey-900">Line Chart</h6>
-            <div class="mT-30">
-            <canvas id="line-chart" height="220"></canvas>
-            </div>
-        </div>
-        </div>
+    {% for coin, coindata in linecharts_dict.items() %}
+    {% for chart, chartdata in coindata['market_data'].items() %}
+              <div class="masonry-item col-md-6">
+                <div class="bd bgc-white">
+                  <div class="layers">
+                    <div class="layer w-100 pX-20 pT-20">
+                      <h6 class="lh-1">{{ chart }}</h6>
+                    </div>
+                    <div class="layer w-100 p-20">
+                      <canvas height="220" class="line-chart"><div style="display: none;" class="div-data-for-chart">
+        {% for serie_name, values in chartdata['Data Series'].items() %}
+                          <input type="text" value="{{ values }}" id="{{ serie_name }}" class="chart_serie_data">
+        {% endfor %}
+                          <input type="text" value="{{ chartdata['Labels'] }}" id="chart_labels" class="chart_labels"><input type="text" value="{{ chartdata['Series Styles'] }}" id="chart_serie_styles" class="chart_serie_styles"></div>
+                      </canvas>
+                    </div>
+                    <div class="layer bdT p-20 w-100">
+                      <div class="peers ai-c jc-c gapX-20">
+        {% for change_name, value in chartdata['Change Percentage'].items() %}
+                        <div class="peer">
+                          <span class="fsz-def fw-600 mR-10 c-grey-800">{{ value }}% 
+            {% if value >= 0 %}
+                              <i class="fa fa-level-up c-green-500"></i>
+            {% else %}
+                              <i class="fa fa-level-down c-red-500"></i>
+            {% endif %}
+                          </span>
+                          <small class="c-grey-500 fw-600">{{ change_name }}</small>
+                        </div>
+        {% endfor %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+    {% endfor %}
+    {% endfor %}
         <div class="masonry-item col-md-6">
         <div class="bgc-white p-20 bd">
             <h6 class="c-grey-900">Area Chart</h6>
@@ -33,14 +62,25 @@
             </div>
         </div>
         </div>
-        <div class="masonry-item col-md-6">
-        <div class="bgc-white p-20 bd">
-            <h6 class="c-grey-900">Bar Chart</h6>
-            <div class="mT-30">
-            <canvas id="bar-chart" height="220"></canvas>
-            </div>
-        </div>
-        </div>
+
+    {% for coin, coindata in barcharts_dict.items() %}
+              <div class="masonry-item col-md-6">
+        {% for chart, chartdata in coindata['market_data'].items() %}
+                <div class="bgc-white p-20 bd">
+                    <h6 class="c-grey-900">{{ chart }}</h6>
+                    <div class="mT-30">
+                      <canvas height="220" class="bar-chart"><div style="display: none;" class="div-data-for-chart">
+            {% for serie_name, values in chartdata['Data Series'].items() %}
+                              <input type="text" value="{{ values }}" id="{{ serie_name }}" class="chart_serie_data">
+            {% endfor %}
+                          <input type="text" value="{{ chartdata['Labels'] }}" id="chart_labels" class="chart_labels"><input type="text" value="{{ chartdata['Series Styles'] }}" id="chart_serie_styles" class="chart_serie_styles"></div>
+                      </canvas>
+                    </div>
+                </div>
+        {% endfor %}
+              </div>
+    {% endfor %}
+
         <div class="masonry-item col-md-6">
         <div class="bgc-white p-20 bd">
             <h6 class="c-grey-900">jQuery Sparkline</h6>
