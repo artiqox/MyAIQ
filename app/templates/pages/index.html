@@ -6,23 +6,185 @@
 
 {% block content %}
 
+
+            <div class="row gap-20 masonry pos-r">
+              <div class="masonry-sizer col-md-6"></div>
+
+
+    {% for coin, coindata in linecharts_dict.items() %}
+	
+	
+            <!-- #modal for charts with content passed by bundle.js from coingecko ==================== -->
+            <div class="modal fade" id="coingeckocharts-{{ coin }}">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel2">{{ coin }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+
+                    <div class="bd bgc-white">
+                      <div class="layers">
+                        <div class="layer w-100 pX-20 pT-20">
+                          <h6 class="lh-1">{{ coin }}</h6>
+                        </div>
+                        <div class="layer w-100 p-20">
+                          <canvas height="420" class="line-chart" id="coingecko-line-chart-{{ coin }}"><div style="display: none;" class="div-data-for-coingecko-line-chart" id="div-data-for-coingecko-line-chart-{{ coin }}"></div><div style="display: none;" class="coingecko-line-chart" id="{{ coin }}"></div>
+                          </canvas>
+                        </div>
+
+                      </div>
+                    </div>
+              
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                </div>
+                </div>
+            </div>
+	
+	
+
+	
+            <div class="modal fade" id="accounts-{{ coin }}">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{ coin }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+
+              
+
+                    <div class="container-fluid">
+                        <h4 class="c-grey-900 mT-10 mB-30">Rich List</h4>
+       {% if coindata['top_accounts'] %}
+       {% for currency, accounts in coindata['top_accounts'].items() %}
+                        <div class="row">
+                        <div class="col-md-12">
+                            <div class="bgc-white bd bdrs-3 p-20 mB-20">
+                            <h4 class="c-grey-900 mB-20">{{ currency }}</h4>
+                            <table id="dataTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                    <th>#</th>
+                                    <th>Account</th>
+                                    <th>Amount</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                    <th>#</th>
+                                    <th>Account</th>
+                                    <th>Amount</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+       {% for account, amount in accounts['accounts'] %}
+                                    <tr>
+                                    <td>{{ loop.index }}</td>
+                                    <td>{{ account }}</td>
+                                    <td>{{ amount }}</td>
+                                    </tr>
+        {% endfor %}
+                                </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        </div>
+        {% endfor %}
+        {% endif %}
+                    </div>
+
+
+              
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+    {% endfor %}
+
+
+
               <div class="masonry-item w-100">
                 <!-- #MyAIQ wallet ==================== -->
                 <div class="bd bgc-white">
                   <div class="layers">
+                    <div class="layer w-100 p-20">
+                      <h6 class="lh-1">Wallets Balances and Last Transactions</h6>
+					  
+					
+					  
+					  
+					  
+                    </div>
+
+
                     <div class="layer w-100">
+
+    {% for wallet, walletdetails in dashboardwallets_dict.items() %}
                       <div class="bgc-light-blue-500 c-white p-20">
                         <div class="peers ai-c jc-sb gap-40">
                           <div class="peer peer-greed">
-                            <h5>{{ current_user.aie_account }}</h5>
-                            <p class="mB-0">{{ current_user.displayname }}</p>
+                            <h5>{{ walletdetails['balance'] }}</h5>
+
+                            <p class="mB-0">{{ walletdetails['type'] }}: {{ wallet }}</p>
+							
                           </div>
                           <div class="peer">
-                            <h3 class="text-right">{{ aiq_balance }} AIQ, {{ aie_balance }} AIE</h3>
+                            <a href="javascript:void(0);" class="td-n c-white cH-blue-500 fsz-md p-5" data-toggle="modal" data-target="#transactions-list-{{ wallet }}">
+                            <i class="ti-files" data-toggle="tooltip" data-placement="left" title="Last Transactions"></i>
+                            </a>
+                          </div>
+                          <div class="peer">
+                            <a href="javascript:void(0);" class="td-n c-white cH-blue-500 fsz-md p-5" data-toggle="modal" data-target="#coingeckocharts-{{ walletdetails['type'] }}">
+                            <i class="ti-bar-chart-alt" data-toggle="tooltip" data-placement="left" title="Market Charts"></i>
+                            </a>
+                          </div>
+                          <div class="peer">
+                            <a href="javascript:void(0);" class="td-n c-white cH-blue-500 fsz-md p-5" data-toggle="modal" data-target="#accounts-{{ walletdetails['type'] }}">
+                            <i class="ti-credit-card" data-toggle="tooltip" data-placement="left" title="Rich List"></i>
+                            </a>
                           </div>
                         </div>
                       </div>
-                      <div class="table-responsive p-20">
+					  
+					  
+					  
+        <div class="modal fade" id="transactions-list-{{ wallet }}">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">{{ wallet }}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+        {% if walletdetails['transactions'] %}
+		
+		
+		
+		
+		
+		
+                      <div class="table-responsive p-2">
+
                         <table class="table">
                           <thead>
                             <tr>
@@ -34,34 +196,68 @@
                             </tr>
                           </thead>
                           <tbody>
-{% block container %}
-    {% for timestamp, transaction in transactions.items() %}
-                            <tr>
-                              <td class="fw-600">{{ timestamp }}</td>
-        {% if transaction['sender'] == current_user.aie_account %}
-                              <td>You</td>
-        {% else %}
-                              <td>{{ transaction['sender'] }}</td>
-        {% endif %}
-        {% if transaction['recipient'] == current_user.aie_account %}
-                              <td>You</td>
-        {% else %}
-                              <td>{{ transaction['recipient'] }}</td>
-        {% endif %}
-                              <td><span class="text-success">{{ transaction['amount'] }}</span></td>
-                              <td><span class="text-success">{{ transaction['fee'] }}</span></td>
-                            </tr>
-    {% endfor %}
-{% endblock %}
+
+            {% for timestamp, transaction in walletdetails['transactions'].items() %}
+                                    <tr>
+                                      <td class="fw-600">{{ timestamp }}</td>
+                {% if transaction['sender'] == current_user.aie_account %}
+                                      <td>You</td>
+                {% else %}
+                                      <td>{{ transaction['sender'] }}</td>
+                {% endif %}
+                {% if transaction['recipient'] == current_user.aie_account %}
+                                      <td>You</td>
+                {% else %}
+                                      <td>{{ transaction['recipient'] }}</td>
+                {% endif %}
+                                      <td><span class="text-success">{{ transaction['amount'] }}</span></td>
+                                      <td><span class="text-success">{{ transaction['fee'] }}</span></td>
+                                    </tr>
+            {% endfor %}
+
+
                           </tbody>
                         </table>
                        </div>
-                    </div>
-                  </div>
+        {% endif %}
                   <div class="ta-c bdT w-100 p-20">
-                    <a href="https://block.hebeblock.com/#/account/{{ current_user.aie_account }}?type=Aie">Check all the transactions</a>
+                    <a href="{{ walletdetails['external_explorer'] }}">Check all the transactions</a>
                   </div>
+            </div>
+                    <div class="modal-footer">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+            </div>
+        </div>
+        </div>
+					  
+					  
+					  
+					  
+					  
+
+
+    {% endfor %}
+
+
+                    </div>
+
+                  </div>
+
                 </div>
               </div>
+			  
+			  
+			  
+
+			  
+			  
+			  
+            </div>
+
+
+
             
 {% endblock content %}
